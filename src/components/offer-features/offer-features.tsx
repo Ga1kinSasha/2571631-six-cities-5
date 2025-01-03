@@ -1,5 +1,7 @@
+import { memo } from 'react';
 import { ApartmentType } from '../../types/offers';
 import { capitalize } from '../../utils/utils';
+import { DEFAULT_ONE } from '../../const';
 
 type OfferFeaturesProps = {
   type: ApartmentType;
@@ -14,13 +16,15 @@ function OfferFeatures({type, bedrooms, maxAdults}: OfferFeaturesProps): JSX.Ele
         {capitalize(type)}
       </li>
       <li className="offer__feature offer__feature--bedrooms">
-        {bedrooms} {bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
+        {bedrooms} {bedrooms > DEFAULT_ONE ? 'Bedrooms' : 'Bedroom'}
       </li>
       <li className="offer__feature offer__feature--adults">
-      Max {maxAdults} {maxAdults > 1 ? 'adults' : 'adult'}
+      Max {maxAdults} {maxAdults > DEFAULT_ONE ? 'adults' : 'adult'}
       </li>
     </ul>
   );
 }
 
-export default OfferFeatures;
+const MemoizedOfferFeatures = memo(OfferFeatures);
+
+export default MemoizedOfferFeatures;
